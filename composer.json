@@ -1,0 +1,28 @@
+{
+    "name": "zain-hasan/notes-project",
+    "authors": [
+        {
+            "name": "Zain Hasan",
+            "email": "zain-nada-12@hotmail.com"
+        }
+    ],
+    "version": "1.0.0",
+    "require": {
+        "illuminate/collections": "^12.33"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\":"Core/",
+            "Http\\":"Http/",
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
