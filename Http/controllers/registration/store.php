@@ -10,6 +10,7 @@ $errors = [];
 
 $email = $_POST['email'];
 $password = $_POST['password'];
+$confirm_password = $_POST['confirm_password'];
 $gender = $_POST['gender'];
 $name = $_POST['name'];
 $birthdate = $_POST['birthdate'];
@@ -21,6 +22,10 @@ if (!Validator::email($email)){
 
 if (!Validator::string($password,7,255)){
     $errors['password'] = 'Please provide a password of at least 7 characters.';
+} else {
+    if ($password !== $confirm_password){
+        $errors['password'] = 'Password does not match.';
+    }
 }
 
 if (!Validator::string($name,3,45)){

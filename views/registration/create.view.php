@@ -88,7 +88,6 @@
                         });
                     </script>
 
-
                     <div>
                         <div class="flex items-center justify-between">
                             <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
@@ -98,10 +97,20 @@
                                    autocomplete="current-password"
                                    class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"/>
                         </div>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <label for="confirm password" class="block text-sm/6 font-medium text-gray-900">Confirm Password</label>
+                        </div>
+                        <div class="mt-2">
+                            <input id="confirm password" type="password" name="confirm password" required
+                                   autocomplete="current-password"
+                                   class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"/>
+                        </div>
                         <?php if (isset($errors['password'])): ?>
                             <p class="text-red-500 text-xs mt-2"><?= $errors['password'] ?></p>
                         <?php endif; ?>
-
                     </div>
 
 
