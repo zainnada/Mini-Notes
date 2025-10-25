@@ -71,7 +71,8 @@ if ($user){
     $_SESSION['user'] = [
         'user_id' => $user['id'],
         'name' => $user['name'],
-        'email' => $email,
+        'email' => $user['email'],
+        'gender'=>$user['gender'],
         'birthdate' => $user['birthdate']
     ];
 

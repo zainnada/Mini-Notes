@@ -3,6 +3,7 @@
 $router->get('/', 'index.php');
 $router->get('/about', 'about.php');
 $router->get('/contact', 'contact.php');
+$router->get('/profile', 'profile.php')->only('auth');
 
 $router->get('/notes', 'notes/index.php')->only('auth');
 
