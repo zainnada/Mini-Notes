@@ -4,7 +4,7 @@
 
 <main>
   <div class="flex justify-center px-4 py-6 sm:px-6 lg:px-8">
-    <form method="POST" action="/note/edit" class="w-full max-w-md bg-white p-6 rounded-xl shadow-md">
+    <form method="POST" action="/note/edit" class="w-full max-w-md bg-white p-6 rounded-xl shadow-md" onsubmit="return confirm('Are you sure you want to edit this record?');">
       <div class="col-span-full">
         <label for="title" class="block text-sm font-medium text-gray-900">Title</label>
         <div class="mt-2">
