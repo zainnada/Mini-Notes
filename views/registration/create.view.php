@@ -13,14 +13,13 @@
             </div>
 
             <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form action="#" method="POST" class="space-y-6">
+                <form action="/register" method="POST" class="space-y-6">
 
                     <div>
                         <label for="name" class="block text-sm/6 font-medium text-gray-900">Full Name</label>
                         <div class="mt-2">
-                            <input id="name" value="<?php if (!empty($errors)) {
-                                echo $_POST['name'];
-                            } ?>" type="text" name="name" required autocomplete="name"
+                            <input id="name" value="<?= old('name') ?>" type="text" name="name" required
+                                   autocomplete="name"
                                    class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"/>
                         </div>
                         <?php if (isset($errors['name'])): ?>
@@ -31,9 +30,8 @@
                     <div>
                         <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
                         <div class="mt-2">
-                            <input id="email" value="<?php if (!empty($errors)) {
-                                echo $_POST['email'];
-                            } ?>" type="email" name="email" required autocomplete="email"
+                            <input id="email" value="<?= old('email') ?>" type="email" name="email" required
+                                   autocomplete="email"
                                    class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"/>
                         </div>
                         <?php if (isset($errors['email'])): ?>
@@ -41,38 +39,41 @@
                         <?php endif; ?>
                     </div>
 
-                    <div>
-                        <label for="Headline">
-                            <span class="text-sm font-medium text-gray-900"> Gender </span>
-                            <div class="mt-2">
+                    <div class="flex gap-4">
+                        <label for="gender" class="block text-sm/6 mt-2 font-medium text-gray-900">Gender</label>
+                        <label
+                                for="male"
+                                class="flex items-center gap-2 cursor-pointer p-2 rounded-lg border border-gray-300 hover:bg-gray-50"
+                        >
+                            <input type="radio" name="gender" id="male" value="male"
+                                   class="text-blue-600 focus:ring-blue-500" <?= old('gender') === 'male' ? 'checked' : '' ?>/>
+                            <span class="text-sm text-gray-700">Male</span>
+                        </label>
 
-                                <select
-                                        name="gender"
-                                        id="gender"
-                                        class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
-                                >
-                                    <option disabled value="">Select Sex</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-
+                        <label
+                                for="female"
+                                class="flex items-center gap-2 cursor-pointer p-2 rounded-lg border border-gray-300 hover:bg-gray-50"
+                        >
+                            <input type="radio" name="gender" id="female" value="female"
+                                   class="text-pink-600 focus:ring-pink-500" <?= old('gender') === 'female' ? 'checked' : '' ?>/>
+                            <span class="text-sm text-gray-700">Female</span>
                         </label>
                     </div>
+                    <?php if (isset($errors['gender'])): ?>
+                        <p class="text-red-500 text-xs mt-2"><?= $errors['gender'] ?></p>
+                    <?php endif; ?>
 
 
                     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
                     <div class="mt-2">
-                        <lable class="block text-sm/6 font-medium text-gray-900">Birthdate</lable>
+                        <lable for="birthdate" class="block text-sm/6 font-medium text-gray-900">Birthdate</lable>
                         <div class="mt-2">
-                            <input id="datepicker"
+                            <input id="birthdate"
                                    name="birthdate"
                                    class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
                                    type="text"
                                    placeholder="Select a date"
-                                   value="<?php if (!empty($errors)) {
-                                      echo $_POST['birthdate'];
-                                   } ?>"
+                                   value="<?= old('birthdate') ?>"
                             >
                         </div>
                         <?php if (isset($errors['birthdate'])): ?>
@@ -82,7 +83,7 @@
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                     <script>
-                        flatpickr("#datepicker", {
+                        flatpickr("#birthdate", {
                             maxDate: "2015-12-31",
                             minDate: "1950-01-01",
                         });
@@ -101,10 +102,11 @@
 
                     <div>
                         <div class="flex items-center justify-between">
-                            <label for="confirm password" class="block text-sm/6 font-medium text-gray-900">Confirm Password</label>
+                            <label for="confirm_password" class="block text-sm/6 font-medium text-gray-900">Confirm
+                                Password</label>
                         </div>
                         <div class="mt-2">
-                            <input id="confirm password" type="password" name="confirm password" required
+                            <input id="confirm_password" type="password" name="confirm_password" required
                                    autocomplete="current-password"
                                    class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"/>
                         </div>

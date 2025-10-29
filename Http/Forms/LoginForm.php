@@ -16,7 +16,7 @@ class LoginForm
         }
 
         if (!Validator::string($attributes['password'])) {
-            $this->errors['password'] = 'Please provide a vaild password.';
+            $this->errors['password'] = 'Please provide a valid password.';
         }
     }
 
@@ -26,10 +26,12 @@ class LoginForm
 
         return $instance->failed() ? $instance->throw() : $instance;
     }
+
     public function throw()
     {
         ValidationException::throw($this->errors(), $this->attributes);
     }
+
     public function failed()
     {
         return count($this->errors);
@@ -39,6 +41,7 @@ class LoginForm
     {
         return $this->errors;
     }
+
     public function error($field, $message)
     {
         $this->errors[$field] = $message;
