@@ -5,8 +5,8 @@ use Http\Forms\LoginForm;
 
 
 $form = LoginForm::validate($attributes = [
-    'email'=>$_POST['email'],
-    'password'=>$_POST['password']
+    'email' => $_POST['email'],
+    'password' => $_POST['password']
 ]);
 
 $signedIn = (new Authenticator())->attemptLogin(

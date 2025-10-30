@@ -2,10 +2,11 @@
 
 namespace Core;
 
-class App{
+class App
+{
 
     protected static $container;
-    
+
     public static function setContainer($container)
     {
         static::$container = $container;
@@ -20,10 +21,10 @@ class App{
     {
         return static::container()->resolve($key);
     }
-    
-    public static function bind($key,$resolver)
+
+    public static function bind($key, $resolver)
     {
-        return static::container()->bind($key,$resolver);
+        return static::container()->bind($key, $resolver);
     }
 
 

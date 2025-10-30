@@ -4,7 +4,7 @@
 $heading = "Create Note";
 
 
-view("notes/create.view.php",[
-    'heading'=>$heading,
-    'errors'=>[]
+view("notes/create.view.php", [
+    'heading' => $heading,
+    'errors' => []
 ]);

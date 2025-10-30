@@ -11,14 +11,14 @@ $currentUserId = $_SESSION['user']['user_id'];
 
 $id = $_GET['id'];
 
-$note = $db->query('select * from notes where id = ?',[$id])->findOrFail();
+$note = $db->query('select * from notes where id = ?', [$id])->findOrFail();
 
 authorize($note['user_id'] === $currentUserId);
 
 $heading = 'Edit Note';
-view("notes/edit.view.php",[
-    'heading'=>$heading,
-    'errors'=>[],
-    'note'=>$note
+view("notes/edit.view.php", [
+    'heading' => $heading,
+    'errors' => [],
+    'note' => $note
 ]);
 

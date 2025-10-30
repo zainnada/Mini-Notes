@@ -3,22 +3,28 @@
 namespace Core;
 
 use DateTime;
-class Validator {
-    public static function string($value,$min=1,$max=INF): bool {
+
+class Validator
+{
+    public static function string($value, $min = 1, $max = INF): bool
+    {
         $value = trim($value);
         $value = preg_replace('/\s+/', ' ', $value);
-        return strlen($value) >= $min && strlen($value)<=$max;
+        return strlen($value) >= $min && strlen($value) <= $max;
     }
 
-    public static function name($name): bool {
-        return preg_match("/^[\p{L}\s'-]+$/u",$name);
+    public static function name($name): bool
+    {
+        return preg_match("/^[\p{L}\s'-]+$/u", $name);
     }
 
-    public static function email($value):bool{
-        return filter_var($value,FILTER_VALIDATE_EMAIL);
+    public static function email($value): bool
+    {
+        return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
 
-    public static function date($birthdate):bool{
+    public static function date($birthdate): bool
+    {
 
         // Strict format and validity check (YYYY-MM-DD)
         $d = DateTime::createFromFormat('Y-m-d', $birthdate);
@@ -30,7 +36,8 @@ class Validator {
         return true;
     }
 
-    public static function greaterThan(int $n1,int $n2):bool{
+    public static function greaterThan(int $n1, int $n2): bool
+    {
         return $n1 > $n2;
     }
 

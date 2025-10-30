@@ -19,7 +19,6 @@ class Database {
 
         $this->statement = $this->connection->prepare($query);
         $this->statement->execute($params);
-        // return $statement;
         return $this;
     }
     public function find(){

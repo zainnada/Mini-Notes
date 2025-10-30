@@ -2,9 +2,6 @@
 
 namespace Core;
 
-use Core\Database;
-use Core\App;
-
 class Authenticator
 {
     public function attemptLogin($email, $password)
@@ -18,7 +15,6 @@ class Authenticator
                 $this->login($user);
                 header('location: /');
                 return true;
-                exit();
             }
         }
     }
