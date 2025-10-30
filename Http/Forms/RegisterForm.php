@@ -21,6 +21,10 @@ class RegisterForm extends Form
         }
         if (!Validator::string($attributes['name'], 3, 45)) {
             $this->errors['name'] = 'Please provide a valid name of at max 45 characters.';
+        } else {
+            if (!Validator::name($attributes['name'])) {
+                $this->errors['name'] = "Invalid name. Only letters, spaces, and simple symbols like ' and - are allowed.";
+            }
         }
         if (empty($attributes['birthdate'])) {
             $this->errors['birthdate'] = 'Birthdate is required.';

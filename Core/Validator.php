@@ -6,9 +6,14 @@ use DateTime;
 class Validator {
     public static function string($value,$min=1,$max=INF): bool {
         $value = trim($value);
+        $value = preg_replace('/\s+/', ' ', $value);
         return strlen($value) >= $min && strlen($value)<=$max;
     }
-    
+
+    public static function name($name): bool {
+        return preg_match("/^[\p{L}\s'-]+$/u",$name);
+    }
+
     public static function email($value):bool{
         return filter_var($value,FILTER_VALIDATE_EMAIL);
     }
