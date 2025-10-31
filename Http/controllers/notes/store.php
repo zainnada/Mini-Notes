@@ -1,6 +1,7 @@
 <?php
 
 use Core\Database;
+use Core\Session;
 use Core\Validator;
 
 use Core\App;
@@ -37,6 +38,8 @@ $db->query(
         ':user_id' => $currentUserId
     ]
 );
+
+Session::flash('note', 'store');
 
 header('location: /notes');
 die();

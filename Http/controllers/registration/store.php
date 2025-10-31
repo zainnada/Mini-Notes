@@ -1,6 +1,7 @@
 <?php
 
 use Core\Authenticator;
+use Core\Session;
 use Http\Forms\RegisterForm;
 
 $form = RegisterForm::validate($attributes = [
@@ -24,6 +25,8 @@ if (!$registered) {
     header('location: /login');
     exit();
 }
+
+Session::flash('user_registration', 'success');
 
 header('location: /');
 exit();

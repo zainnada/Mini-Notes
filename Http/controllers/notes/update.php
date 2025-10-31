@@ -2,6 +2,7 @@
 
 use Core\Database;
 use Core\App;
+use Core\Session;
 use Core\Validator;
 
 $db = App::resolve(Database::class);
@@ -41,6 +42,8 @@ $db->query('update notes set title=:title, body=:body where id=:id', [
     ':body' => $_POST['body'],
     ':id' => $_POST['id']
 ]);
+
+Session::flash('note', 'update');
 
 // redirect the user
 header('location: /notes');

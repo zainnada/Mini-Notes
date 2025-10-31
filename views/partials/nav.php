@@ -55,12 +55,39 @@
                             <span class="absolute -inset-1.5"></span>
                             <span class="sr-only">Open user menu</span>
                         </button>
-                        <!-- my edit -->
                         <?php if ($_SESSION['user'] ?? false): ?>
-                            <a href="profile">
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                     alt="" class="size-8 rounded-full outline -outline-offset-1 outline-white/10"/>
+                            <a href="profile" class="profile-link mt-2">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Profile" class="profile-image">
                             </a>
+
+                            <style>
+                                .profile-link {
+                                    display: inline-block;
+                                    border-radius: 50%;
+                                    overflow: hidden;
+                                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                                }
+
+                                .profile-image {
+                                    width: 45px;
+                                    height: 45px;
+                                    border-radius: 50%;
+                                    object-fit: cover;
+                                    transition: opacity 0.3s ease;
+                                }
+
+                                /* Feedback effect when hovering */
+                                .profile-link:hover {
+                                    transform: scale(1.05);
+                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                                    cursor: pointer;
+                                }
+
+                                .profile-link:hover .profile-image {
+                                    opacity: 0.9;
+                                }
+                            </style>
+
                         <?php else: ?>
                             <a href="/register" class="
               <?php
