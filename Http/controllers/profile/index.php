@@ -2,7 +2,7 @@
 
 $user = $_SESSION['user'];
 
-view("profile.view.php", [
+view("profile/index.view.php", [
     'heading' => "My Profile",
     'user' => $user,
 ]);

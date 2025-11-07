@@ -12,11 +12,13 @@ class RegisterForm extends Form
     {
         Parent::__construct($this->attributes['email']);
 
-        if (!Validator::string($attributes['password'], 7, 255)) {
-            $this->errors['password'] = 'Please provide a password of at least 7 characters.';
-        } else {
-            if ($attributes['password'] !== $attributes['confirm_password']) {
-                $this->errors['password'] = 'Password does not match.';
+        if ($attributes['password']??false) { // it's excluded in the edit form
+            if (!Validator::string($attributes['password'], 7, 255)) {
+                $this->errors['password'] = 'Please provide a password of at least 7 characters.';
+            } else {
+                if ($attributes['password'] !== $attributes['confirm_password']) {
+                    $this->errors['password'] = 'Password does not match.';
+                }
             }
         }
         if (!Validator::string($attributes['name'], 3, 45)) {

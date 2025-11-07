@@ -3,7 +3,10 @@
 $router->get('/', 'index.php');
 $router->get('/about', 'about.php');
 $router->get('/contact', 'contact.php');
-$router->get('/profile', 'profile.php')->only('auth');
+
+$router->get('/profile', 'profile/index.php')->only('auth');
+$router->get('/profile/edit', 'profile/edit.php')->only('auth');
+$router->patch('/profile/edit', 'profile/update.php')->only('auth');
 
 $router->get('/notes', 'notes/index.php')->only('auth');
 

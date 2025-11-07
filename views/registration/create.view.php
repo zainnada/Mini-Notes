@@ -47,8 +47,8 @@
                             for="male"
                             class="flex items-center gap-2 cursor-pointer p-2 rounded-lg border border-gray-300 hover:bg-gray-50"
                     >
-                        <input type="radio" name="gender" id="male" value="male"
-                               class="text-blue-600 focus:ring-blue-500" <?= old('gender') === 'male' ? 'checked' : '' ?>/>
+                        <input type="radio" name="gender" id="male" value="Male"
+                               class="text-blue-600 focus:ring-blue-500" <?= strtolower(old('gender')) === 'male' ? 'checked' : '' ?>/>
                         <span class="text-sm text-gray-700">Male</span>
                     </label>
 
@@ -56,8 +56,8 @@
                             for="female"
                             class="flex items-center gap-2 cursor-pointer p-2 rounded-lg border border-gray-300 hover:bg-gray-50"
                     >
-                        <input type="radio" name="gender" id="female" value="female"
-                               class="text-pink-600 focus:ring-pink-500" <?= old('gender') === 'female' ? 'checked' : '' ?>/>
+                        <input type="radio" name="gender" id="female" value="Female"
+                               class="text-pink-600 focus:ring-pink-500" <?= strtolower(old('gender')) === 'female' ? 'checked' : '' ?>/>
                         <span class="text-sm text-gray-700">Female</span>
                     </label>
                 </div>

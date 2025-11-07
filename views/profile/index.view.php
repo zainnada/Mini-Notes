@@ -22,7 +22,7 @@
                             Full name
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            <?= htmlspecialchars($user['name']) ?>
+                            <?= htmlspecialchars($user['name'] ?? '') ?>
                         </dd>
                     </div>
                     <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -30,7 +30,7 @@
                             Email address
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            <?= htmlspecialchars($user['email']) ?>
+                            <?= htmlspecialchars($user['email'] ?? '') ?>
                         </dd>
                     </div>
                     <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -38,7 +38,7 @@
                             Gender
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            <?= htmlspecialchars($user['gender']) ?>
+                            <?= htmlspecialchars($user['gender'] ?? '') ?>
                         </dd>
                     </div>
                     <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -46,14 +46,15 @@
                             Birthdate
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            <?= htmlspecialchars($user['birthdate']) ?>
+                            <?= htmlspecialchars($user['birthdate'] ?? '') ?>
                         </dd>
                     </div>
                 </dl>
             </div>
         </div>
-
-
+        <a href="/profile/edit"
+           class="mt-6 inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition">            Edit
+        </a>
     </div>
 </main>
 

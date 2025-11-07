@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use function PHPUnit\Framework\isNull;
+
 class Authenticator
 {
     public function attemptLogin($email, $password)
@@ -59,6 +61,61 @@ class Authenticator
             return true;
         }
     }
+
+    public function attemptEditProfile($user_id, $attributes)
+    {
+        $db = App::resolve(Database::class);
+
+        if (!self::isEmailAvailable($attributes['email'],$user_id)) {
+            Session::flash('errors', ['email'=>'Email is already registered']);
+            Session::flash('old', $attributes);
+            return false;
+        }
+        else {
+            $db->query('UPDATE users
+            SET name = :name,
+                email = :email,
+                gender = :gender,
+                birthdate = :birthdate
+            WHERE id = :user_id', [
+                ':name' => $attributes['name'],
+                ':email' => $attributes['email'],
+                ':gender' => $attributes['gender'],
+                ':birthdate' => $attributes['birthdate'],
+                ':user_id' => $user_id
+            ]);
+
+            $user = $db->query('select * from users where email=:email', [':email' => $attributes['email']])->find();
+//            Session::flash('test', var_dump($user));
+
+            $this->login($user);
+            return true;
+        }
+    }
+
+    public static function isEmailAvailable($email, $user_id)
+    {
+        $db = App::resolve(Database::class);
+
+        $user = $db->query(
+            'SELECT * FROM users WHERE email = :email',
+            [':email' => $email]
+        )->find();
+
+//        Session::flash('test',$user);
+//        Session::flash('test2',"{$user['id']}"."-$user_id");
+
+        if (!$user) {
+            return true;
+        }
+
+        if ($user['id'] == $user_id) {
+            return true;
+        }
+
+        return false;
+    }
+
 
     public function logout()
     {
