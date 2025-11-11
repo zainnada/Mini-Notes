@@ -25,7 +25,9 @@
 <!---->
 <!--        --><?php //endif; ?>
 
-        <p>Hello, <?= htmlspecialchars($_SESSION['user']['name'] ?? 'Guest') ?></p>
+        <?php if ($_SESSION['user']['name']??false):?>
+        <p>Hello, <?= htmlspecialchars($_SESSION['user']['name']) ?></p>
+        <?php endif;?>
         <h1 class="text-3xl font-bold tracking-tight text-gray-900"><?= $heading; ?></h1>
     </div>
 </header>

@@ -125,6 +125,12 @@
                     </button>
                 </div>
             </form>
+            <p class="mt-5 text-gray-700">
+                Already have an account?
+                <a href="/login" class="text-orange-500 hover:text-orange-600 font-semibold transition-colors duration-200">
+                    Login
+                </a>
+            </p>
 
         </div>
 

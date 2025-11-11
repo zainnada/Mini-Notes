@@ -34,17 +34,13 @@ class Authenticator
         session_regenerate_id(true);
     }
 
-    public function attemptRegister($email, $password, $name, $gender, $birthdate)
+    public function attemptRegister($email, $password, $name, $gender, $birthdate): bool
     {
         // check if the account already exists
         $db = App::resolve(Database::class);
         $user = $db->query('select * from users where email=:email', [':email' => $email])->find();
 
-        if ($user) {
-            // if yes, flash the email, and redirect to a login page in the controller
-            Session::flash('old', ['email' => $email]);
-            return false;
-        } else {
+        if (!$user) {
             // if not, save one to the database, and then log the user in, and redirect in the controller
             $db->query('insert into users (name,email,gender,birthdate,password) values(:name,:email,:gender,:birthdate,:password)', [
                 ':name' => $name,
@@ -60,6 +56,10 @@ class Authenticator
             $this->login($user);
             return true;
         }
+        // if yes, flash the email, and redirect to a login page in the controller
+        Session::flash('old', ['email' => $email]);
+        Session::flash('emailExists', 'This email is already registered.');
+        return false;
     }
 
     public function attemptEditProfile($user_id, $attributes)

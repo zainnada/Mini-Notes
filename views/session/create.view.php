@@ -5,6 +5,11 @@
 <main>
 
     <div class="flex min-h-full flex-col justify-center px-6 py-4 lg:px-8">
+        <?php if ($_SESSION['_flash']['emailExists']??false): ?>
+            <?php $message=$_SESSION['_flash']['emailExists']; ?>
+            <?php require base_path('views/partials/alert/alertBox.php');?>
+        <?php endif;?>
+
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                  alt="Your Company" class="mx-auto h-10 w-auto"/>
@@ -57,6 +62,13 @@
                 </div>
 
             </form>
+
+            <p class="mt-5 text-gray-700">
+                Don't have an account?
+                <a href="/register" class="text-orange-500 hover:text-orange-600 font-semibold transition-colors duration-200">
+                    Sign up
+                </a>
+            </p>
 
         </div>
 
