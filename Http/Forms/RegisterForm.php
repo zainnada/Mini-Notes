@@ -11,6 +11,10 @@ class RegisterForm extends Form
     public function __construct(public array $attributes)
     {
         Parent::__construct($this->attributes['email']);
+        $domain = substr(strrchr($this->attributes['email'], "@"), 1); // Extract domain from email
+        if (!checkdnsrr($domain)){
+            $this->errors['email'] = 'Domain does not have MX records, may not be able to receive email.';
+        }
 
         if ($attributes['password']??false) { // it's excluded in the edit form
             if (!Validator::string($attributes['password'], 7, 255)) {

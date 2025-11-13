@@ -2,7 +2,9 @@
 
 $router->get('/', 'index.php');
 $router->get('/about', 'about.php');
+
 $router->get('/contact', 'contact.php');
+$router->post('/contact', 'send-message.php');
 
 $router->get('/profile', 'profile/index.php')->only('auth');
 $router->get('/profile/edit', 'profile/edit.php')->only('auth');

@@ -2,11 +2,9 @@
 
 namespace Core;
 
-use function PHPUnit\Framework\isNull;
-
 class Authenticator
 {
-    public function attemptLogin($email, $password)
+    public function attemptLogin($email, $password): bool
     {
         $db = App::resolve(Database::class);
         $user = $db->query('select * from users where email=:email', [':email' => $email])->find();
@@ -19,9 +17,10 @@ class Authenticator
                 return true;
             }
         }
+        return false;
     }
 
-    public function login($user)
+    public function login($user): void
     {
         $_SESSION['user'] = [
             'email' => $user['email'],
@@ -62,38 +61,37 @@ class Authenticator
         return false;
     }
 
-    public function attemptEditProfile($user_id, $attributes)
+    public function attemptEditProfile($user_id, $attributes): bool
     {
-        $db = App::resolve(Database::class);
-
-        if (!self::isEmailAvailable($attributes['email'],$user_id)) {
-            Session::flash('errors', ['email'=>'Email is already registered']);
+        if (!self::isEmailAvailable($attributes['email'], $user_id)) {
+            Session::flash('errors', ['email' => 'Email is already registered']);
             Session::flash('old', $attributes);
             return false;
         }
-        else {
-            $db->query('UPDATE users
-            SET name = :name,
-                email = :email,
-                gender = :gender,
-                birthdate = :birthdate
-            WHERE id = :user_id', [
-                ':name' => $attributes['name'],
-                ':email' => $attributes['email'],
-                ':gender' => $attributes['gender'],
-                ':birthdate' => $attributes['birthdate'],
-                ':user_id' => $user_id
-            ]);
 
-            $user = $db->query('select * from users where email=:email', [':email' => $attributes['email']])->find();
+        $db = App::resolve(Database::class);
+
+        $db->query('UPDATE users
+        SET name = :name,
+            email = :email,
+            gender = :gender,
+            birthdate = :birthdate
+        WHERE id = :user_id', [
+            ':name' => $attributes['name'],
+            ':email' => $attributes['email'],
+            ':gender' => $attributes['gender'],
+            ':birthdate' => $attributes['birthdate'],
+            ':user_id' => $user_id
+        ]);
+
+        $user = $db->query('select * from users where email=:email', [':email' => $attributes['email']])->find();
 //            Session::flash('test', var_dump($user));
 
-            $this->login($user);
-            return true;
-        }
+        $this->login($user);
+        return true;
     }
 
-    public static function isEmailAvailable($email, $user_id)
+    public static function isEmailAvailable($email, $user_id): bool
     {
         $db = App::resolve(Database::class);
 
@@ -117,9 +115,31 @@ class Authenticator
     }
 
 
-    public function logout()
+    public function logout(): void
     {
         Session::destroy();
+    }
+
+    public static function attemptSendMessage($attributes): bool
+    {
+        // don't allow to send two messages in the same day
+        $db = App::resolve(Database::class);
+
+        // I am using the database for contact purpose, in the future I will use the email
+        $contact = $db->query(
+            'SELECT * FROM contacts WHERE email = :email and DATE(created_at)=CURDATE()',
+            [':email' => $attributes['email']]
+        )->find();
+
+        if (!$contact){
+            $db->query('insert into contacts (name,email,message) values(:name,:email,:message)', [
+                ':name' => $attributes['name'],
+                ':email' => $attributes['email'],
+                ':message' => $attributes['message']
+            ]);
+            return true;
+        }
+        return false;
     }
 
 }
