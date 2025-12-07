@@ -52,3 +52,15 @@ function old($key, $default = '')
 {
     return Core\Session::get('old')[$key] ?? $default;
 }
+
+function timeAgo($datetime)
+{
+    $timestamp = strtotime($datetime);
+    $diff = time() - $timestamp + 7200; // #
+    // 7200:2 hours, the difference between the UTC timezone and my timezone
+    // # Will edit in the future, to be more dynamic
+    if ($diff < 60) return "a few seconds ago";
+    if ($diff < 3600) return floor($diff / 60) . " minutes ago";
+    if ($diff < 86400) return floor($diff / 3600) . " hours ago";
+    return floor($diff / 86400) . " days ago";
+}

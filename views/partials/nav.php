@@ -31,6 +31,14 @@
               <?php
                         echo urlIs('/contact') ? $active_page_class : $normal_page_class;
                         ?>">Contact</a>
+                        <?php if ($_SESSION['user'] ?? false): ?>
+                        <?php if ($_SESSION['user']['email'] == 'admin@mininotes.com'):?>
+                            <a href="/admin" class="
+              <?php
+                            echo urlIs('/admin') ? $active_page_class : $normal_page_class;
+                            ?>">Admin Dashboard</a>
+                        <?php endif; ?>
+                        <?php endif; ?>
 
 
                     </div>

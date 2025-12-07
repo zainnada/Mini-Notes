@@ -29,3 +29,8 @@ $router->post('/register', 'registration/store.php')->only('guest');
 $router->get('/login', 'session/login.php')->only('guest');
 $router->post('/session', 'session/store.php')->only('guest');
 $router->delete('/session', 'session/destroy.php')->only('auth');
+
+
+$router->get('/admin', 'Admin/index.php')->only('admin');
+$router->get('/message', 'Admin/show-message.php')->only('admin');
+$router->delete('/message', 'Admin/destroy-message.php')->only('admin');
