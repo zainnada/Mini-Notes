@@ -12,9 +12,12 @@ Each user can create, edit, and delete notes, as well as update their profile in
   - Log in and log out
   - Passwords stored securely (hashed)
   - Edit user profile data
+  - Send messages via contact page
 - 🗒️ **Notes Management**
   - Add, edit, view, and delete notes
   - Each user sees only their own notes
+- 👑 **Admin Dashboard**
+  - View and delete the contacts messages
 - 💾 **Database Integration**
   - MySQL database to store users and notes
 - 🧭 **Clean UI**
