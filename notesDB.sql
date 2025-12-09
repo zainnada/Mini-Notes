@@ -10,7 +10,7 @@ CREATE TABLE `users` (
                          `birthdate` date NOT NULL,
                          PRIMARY KEY (`id`),
                          UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+)
 
 CREATE TABLE `notes` (
                          `id` int NOT NULL AUTO_INCREMENT,
@@ -20,4 +20,13 @@ CREATE TABLE `notes` (
                          PRIMARY KEY (`id`),
                          KEY `fk_notes_1_idx` (`user_id`),
                          CONSTRAINT `fk_notes_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+)
+
+CREATE TABLE `contacts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` varchar(1000) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
